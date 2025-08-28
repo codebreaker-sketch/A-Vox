@@ -68,7 +68,8 @@ def save_to_db(file_name, summary, dialogue, trendy_content, key_moments):
         # Split by newlines and clean up
         lines = [line.strip() for line in text.split("\n") if line.strip()]
         # Ensure each line starts with a bullet point
-        formatted_lines = [f"* {re.sub(r'^(\-|\*|•|\d+\.)\s*', '', line).strip()}" for line in lines]
+        cleaned_lines = [re.sub(r'^(\-|\*|•|\d+\.)\s*', '', line).strip() for line in lines]
+        formatted_lines = [f"* {line}" for line in cleaned_lines]
         return "\n".join(formatted_lines)
     
     formatted_trendy_content = format_as_markdown_list(trendy_content)
